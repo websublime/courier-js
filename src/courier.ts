@@ -38,7 +38,7 @@ export class Courier {
 
   #ws: WebSocket;
 
-  subscriptions = new Map([
+  subscriptions = new Map<string, string[]>([
     ['subscription', []]
   ]);
 
@@ -136,16 +136,36 @@ export class Courier {
   }
 
   unsubscribe(topic: string): void {
+    const subscriptions = this.subscriptions.get('subscription');
+
+    if (subscriptions.includes(topic)) {
+      const subs = subscriptions.filter(subscription => subscription !== topic);
+      this.subscriptions.set('subscription', subs);
+
+      this.#ws.send(JSON.stringify({
+        action: 'unsubscribe',
+        topic
+      }));
+    }
+  }
+
+  publish(topic: string, message: Record<string, unknown>): void {
     this.#ws.send(JSON.stringify({
-      action: 'unsubscribe',
+      action: 'publish',
+      message,
       topic
     }));
   }
 
-  publish() {}
+  broadcast(message: Record<string, unknown>): void {
+    this.#ws.send(JSON.stringify({
+      action: 'broadcast',
+      message
+    }));
+  }
 
-  broadcast() {}
-
-  disconnect() {}
+  disconnect(): void {
+    this.#ws.close(1000, 'Work complete');
+  }
 
 }
