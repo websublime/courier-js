@@ -1,0 +1,16 @@
+.status {
+  width: 100%;
+  min-height: 20px;
+  display: block;
+}
+
+.console {
+  border: 1px solid pink;
+  height: 300px;
+  overflow-y: scroll;
+  display: block;
+}
+
+#message {
+  width: 50%;
+}

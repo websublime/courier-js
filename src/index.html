@@ -7,7 +7,29 @@
     <title>Example App</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="status">
+        <button id="connect">Connect</button>
+      </div>
+      <hr>
+      <div class="console"></div>
+      <hr>
+      <div class="topic">
+        <input type="text" placeholder="Create topic" id="topic">
+        <button id="create-topic">Create</button>
+      </div>
+      <hr>
+      <div class="subscriptions">
+        <input type="text" placeholder="Subscribe topic" id="subscribe">
+        <button id="create-subscription">Subscribe</button>
+      </div>
+      <hr>
+      <div class="message">
+        <input type="text" placeholder="Publish message: {topic: 'my-topic', message: {'Hello': 'World'}}" id="message">
+        <button id="create-message">Send message</button>
+      </div>
+      <hr>
+    </div>
     <script type="module" src="/index.ts"></script>
   </body>
 </html>

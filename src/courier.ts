@@ -57,13 +57,16 @@ export class Courier {
       method: 'POST'
     });
 
-    return response.json();
+    const { data } = await response.json();
+
+    return data;
   }
 
-  async createTopic(): Promise<Topic> {
+  async createTopic(topic: string): Promise<Topic> {
     const { api, token } = this.#options;
 
     const response = await fetch(`${api}/topic`, {
+      body: JSON.stringify({ topic }),
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json;charset=utf-8'
@@ -71,7 +74,9 @@ export class Courier {
       method: 'POST'
     });
 
-    return response.json();
+    const { data } = await response.json();
+
+    return data;
   }
 
   async topics(): Promise<Topic[]> {
@@ -85,7 +90,9 @@ export class Courier {
       method: 'GET'
     });
 
-    return response.json();
+    const { data } = await response.json();
+
+    return data;
   }
 
   async hook(payload: Hook): Promise<Hook> {
@@ -100,7 +107,9 @@ export class Courier {
       method: 'POST'
     });
 
-    return response.json();
+    const { data } = await response.json();
+
+    return data;
   }
 
   async sign(): Promise<Signature> {
@@ -114,7 +123,9 @@ export class Courier {
       method: 'GET'
     });
 
-    return response.json();
+    const { data } = await response.json();
+
+    return data;
   }
 
   connect(signature: Signature): WebSocket {
